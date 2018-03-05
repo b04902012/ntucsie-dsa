@@ -4,6 +4,7 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{mathtools}
 \usepackage{clrscode3e}
 \usepackage{graphicx}
 \usepackage{listings}
@@ -40,6 +41,12 @@
 \newcommand{\fontitemi}{\normalsize}
 \newcommand{\fontitemii}{\normalsize}
 
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\def\headline#1{\hbox to \hsize{\hrulefill\quad\lower.3em\hbox{#1}\quad\hrulefill}}
+\def\headline#1{\hbox to \hsize{\hrulefill\quad\lower.3em\hbox{#1}\quad\hrulefill}}
+
 \begin{document}
 
 \begin{center}
@@ -49,6 +56,8 @@
 \textbf{Release: Tuesday, March 13, 2018}\\
 \textbf{Due: Tuesday, March 29, 2018}\\
 TA E-mail: dsa1@csie.ntu.edu.tw\\
+
+\textbf{
 \end{center}
 
 \vspace{5pt}
@@ -60,8 +69,8 @@ TA E-mail: dsa1@csie.ntu.edu.tw\\
 
 \begin{problem} Stack/Queue
 
-    You have learned in class that Stack is a FILO/LIFO data structure and that Queue is a FIFO/LILO data structure.
-    Please design an algorithm(pseudo code) under the followings scenarios. They are all independent.
+    You have learned in class that stack is a FILO/LIFO data structure and that queue is a FIFO/LILO data structure.
+    Please design an algorithm(pseudo code) under the following scenarios. They are all independent.
     You can assume that all data structure mentioned below have infinite capacity and all operations are valid.
     That is, no \texttt{Pop()} will be called on an empty stack and no \texttt{DeQueue()} will be called on an empty queue.
 \begin{enumerate}[label=\alph*.]
@@ -88,7 +97,7 @@ $\lg(n) = \log_2(n)$, $\ln(n) = \log_e(n)$, $\log(n) = \log_{10}(n)$
 \item Please rank the following functions by the order of growth. No proof or extra statement is needed.
     \begin{center}$4^n, 8^n, n^2, n^n, n\lg n, e^{\ln(n)}, 2^{\sqrt{\lg n}}$\end{center}
 \item Prove that $\log(n!) = O(n\lg n)$
-\item Prove or disprove the following statements. You should provide a formal proof or a counterexample for each statement.
+\item Prove or disprove the following statements. You should provide a formal proof or a counterexample for each statement. Please note that in the following statements, $f(n), g(n), i(n), j(n)$ are non-negative, monotonically increasing functions. That is, the union of ranges of these functions is a subset of $\mathbb{R}^+\cup\{0\}$, and $n_1>n_2 \implies f(n_1)\geq f(n_2), g(n_1)\geq g(n_2), i(n_1)\geq i(n_2), j(n_1)\geq j(n_2)$.
     \begin{enumerate}[label=\alph*.]
     \item $100n^2+300n = O(n^2)$.
     \item If $f(n) = O(i(n))$, $g(n) = O(j(n))$, then $f(n) - g(n) = O(i(n) - j(n))$.
@@ -99,19 +108,25 @@ $\lg(n) = \log_2(n)$, $\ln(n) = \log_e(n)$, $\log(n) = \log_{10}(n)$
     \item $f(n) + g(n) = \Theta(\max(f(n), g(n)))$
     \end{enumerate}
 \item Define a function $f(n)$ as below:
-    \begin{align*}
-    f(n) = &1, \text{ when } n = 1\\
-           &2f([\frac{n}{2}]) + n\text{, otherwise}
-    \end{align*}
+    \begin{equation*}
+    f(n) = 
+           \begin{cases}
+           1 &\text{ , if } n = 1\\
+           2f(\floor{\frac{n}{2}}) + n &\text{ , otherwise}
+           \end{cases}
+    \end{equation*}
 Please find out the tightest bound of $f(n)$ with $\Theta$ notation.
 You should provide a proof to get credits.
 Answers without any proof will NOT get any credits.
 (Note: If you want to use the Master Theorem, then you should prove it first)
 \item Define a function $T(n)$ as below:
-    \begin{align*}
-    T(n) = &1, \text{ when } n = 1\\
-           &2T([\sqrt{n}]) + \lg n \text{, otherwise}
-    \end{align*}
+    \begin{equation*}
+    T(n) = 
+           \begin{cases}
+           1 &\text{, when } n = 1\\
+           2T(\floor{\sqrt{n}}) + \lg n &\text{, otherwise}
+           \end{cases}
+    \end{equation*}
 Prove that $T(n) = \Theta(\lg n \times \lg\lg n)$
 
 \end{enumerate}
@@ -161,8 +176,8 @@ Prove that $T(n) = \Theta(\lg n \times \lg\lg n)$
         Both $A$ and $B$ are read-only, you cannot modify them.\\
         In $o(n^2)$ time, $O(1)$ extra space.
 
-\item You are given the heads of two read-only linked list $A$ and $B$. They might contain loop. Please follow the guide and design a procedure to determine whether the shape of the linked lists are identical.\\
-        For example, among the following linked lists, linked list $\beta$ and linked list $\delta$ are identical in shape. You may discover that a linked list contains at most one loop, and if there is one, then the loop must appears at the end. Thus, two linked list are identical in shape if and only if their "chain part" and the "loop part" are of equal size respectively.\\
+\item You are given the heads of two read-only linked list $A$ and $B$. They might contain loop. Please follow the guide and design a procedure to determine whether the shapes of the linked lists are identical.\\
+        For example, among the following linked lists, linked list $\beta$ and linked list $\delta$ are identical in shape. You may discover that a linked list contains at most one loop, and if there is one, then the loop must appears at the end. Thus, two linked lists are identical in shape if and only if their "chain parts" and the "loop parts" are of equal size respectively.\\
 
         \begin{tikzpicture}[list/.style={rectangle split, rectangle split parts=2, draw, rectangle split horizontal}, >=stealth, start chain]
             \node[list,on chain,draw=white] (a) {$\alpha$: };
