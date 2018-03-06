@@ -54,16 +54,24 @@
 \textbf{\Large Homework \#1\\} 
 \vspace{5pt}
 \textbf{Release: Tuesday, March 13, 2018}\\
-\textbf{Due: Tuesday, March 29, 2018}\\
+\textbf{Due: Sunday, March 25, 2018}\\
 TA E-mail: dsa1@csie.ntu.edu.tw\\
+\vspace{5pt}
+\textbf{\headline{Rules and Instructions}}
+\begin{itemize}
+    \item In homework 1, the problem set contains $5$ problems and is divided into two parts, non-programming part (problem 1, 2, 3)  and programming part (problem 4, 5). 
+    \item For problems in non-programming part, you should type your solutions and combine them in ONE pdf file.
+    \item For problems in programming part, you should ...
+    \item Discussions with others are encouraged. However, you should write down your solutions in your own words. In addition, for each problem, you have to specify the references (the Internet URL you consulted with or the people you discussed with) on the first page of your solution to that problem.
+\end{itemize}
 
-\textbf{
 \end{center}
+\newpage
 
 \vspace{5pt}
 
 \begin{center}
-\textbf{\large Non-Programming problems}
+\textbf{\headline{\large Non-Programming Part}}
 \end{center}
 \vspace{10pt}
 
@@ -96,8 +104,10 @@ $\lg(n) = \log_2(n)$, $\ln(n) = \log_e(n)$, $\log(n) = \log_{10}(n)$
 \begin{enumerate}[label=\arabic*.]
 \item Please rank the following functions by the order of growth. No proof or extra statement is needed.
     \begin{center}$4^n, 8^n, n^2, n^n, n\lg n, e^{\ln(n)}, 2^{\sqrt{\lg n}}$\end{center}
-\item Prove that $\log(n!) = O(n\lg n)$
-\item Prove or disprove the following statements. You should provide a formal proof or a counterexample for each statement. Please note that in the following statements, $f(n), g(n), i(n), j(n)$ are non-negative, monotonically increasing functions. That is, the union of ranges of these functions is a subset of $\mathbb{R}^+\cup\{0\}$, and $n_1>n_2 \implies f(n_1)\geq f(n_2), g(n_1)\geq g(n_2), i(n_1)\geq i(n_2), j(n_1)\geq j(n_2)$.
+\item Prove that $\log(n!) = O(n\lg n)$ (deprecated)
+\item Prove or disprove the following statements. You should provide a formal proof or a counterexample for each statement. Please note that in the following statements, $f(n), g(n), i(n), j(n)$ are \textit{non-negative}, \textit{monotonically increasing} functions.\\
+\textit{non-negative}: The union of ranges of these functions is a subset of $\mathbb{R}^+\cup\{0\}$\\
+\textit{monotonically increasing}:\\ $n_1>n_2 \implies f(n_1)\geq f(n_2), g(n_1)\geq g(n_2), i(n_1)\geq i(n_2), j(n_1)\geq j(n_2)$.
     \begin{enumerate}[label=\alph*.]
     \item $100n^2+300n = O(n^2)$.
     \item If $f(n) = O(i(n))$, $g(n) = O(j(n))$, then $f(n) - g(n) = O(i(n) - j(n))$.
@@ -133,6 +143,9 @@ Prove that $T(n) = \Theta(\lg n \times \lg\lg n)$
 
 
 \end{problem}
+
+\newpage
+
 \begin{problem} Linked List.
 
 \begin{enumerate}[label=\arabic*.]
@@ -281,7 +294,7 @@ unsigned int loopLength(list_node *head){
     \setcounter{enumii}{2}
         \item $O(n \lg n)$ time, $O(1)$ extra space.
         \item $O(n)$ time, $O(n)$ extra space.\\
-    \noindent $n$ is the sum of the numbers of nodes of $A$ and $B$, and you are ignorant of $n$.
+    \noindent $n$ is the sum of the numbers of nodes of $A$ and $B$, and you are ignorant of $n$. You are free to use functions \texttt{loopLength()} and \texttt{isLoop()} defined above.
     \end{enumerate}
 
 \end{enumerate}
@@ -291,21 +304,25 @@ unsigned int loopLength(list_node *head){
 
 \vspace{5pt}
 \begin{center}
-\textbf{\large Programming problems}
+\textbf{\headline{\large Programming Part}}
 \end{center}
 \begin{problem}Notepad -{}-
 
 You are required to simulate a very lightweight text editor: \textit{Notepad-}-. The following table shows all the effective keys in this editor and their effects. All other keys are ineffective and {\bfseries should be ignored} by the editor.
+
+Note that in Notepad--, the cursor is NOT supposed to lie right upon a character; instead, it's always between two characters or at the beginning/end of file.
+
+
 \begin{table}[h]
 \centering
 \begin{tabularx}{\textwidth}{|l|X|}
 \hline
-\texttt{a-z} & Overwrite the selected segment with the character; if nothing is selected, simply write the character. Exit \textit{selection mode}.\\\hline
-\texttt{H}   & Move the cursor leftward by one. If the cursor is at the beginning file, do nothing.\\\hline
-\texttt{L}   & Move the cursor rightward by one. If the cursor is at the end file, do nothing.\\\hline
+\texttt{a-z} & Overwrite the selected segment with the character; if nothing is selected, simply write the character. After that, move the cursor to the end of the inserted character, and exit \textit{selection mode}.\\\hline
+\texttt{H}   & Move the cursor leftward by one. If the cursor is at the beginning of the file, do nothing.\\\hline
+\texttt{L}   & Move the cursor rightward by one. If the cursor is at the end of the file, do nothing.\\\hline
 \texttt{V}   & Enter \textit{selection mode}.\\\hline
-\texttt{D}   & Cut the selected segment and overwrite the clipboard with it. Exit \textit{selection mode}.\\\hline
-\texttt{P}   & Overwrite the selected segment with the content in the clipboard; if nothing is selected, simply paste the clipboard content then clear the clipboard. Move the cursor to the end of the pasted content. Exit \textit{selection mode}.\\\hline
+\texttt{D}   & Cut the selected segment and overwrite the clipboard with it, and then exit \textit{selection mode}.\\\hline
+\texttt{P}   & Overwrite the selected segment with the content in the clipboard; if nothing is selected, simply paste the clipboard content then clear the clipboard. Move the cursor to the end of the pasted content, and exit \textit{selection mode}.\\\hline
 \end{tabularx}
 \end{table}
 
@@ -318,8 +335,12 @@ The first line is an integer $T$, indicating that there are $T$ test cases. For 
 \textbf{\large Output Format}\\
 For every test case, output the final content of the file.\\
 
+\textbf{\large Input Constraint}\\
+    $T \leq 10$.\\
+    $\text{length of each string}\leq 10^7$\\
+
 \textbf{\large Sample Input}\\
-\texttt{ 2\\tleVHHHwaVHHac\\dsahahaVHHHHDggHHHHHPLLLLLgggqaq }\\
+\texttt{ 2\\tleVH>>HHwaVHBBHac\\dsahahaVHHHHDggHHHHHPLLLLLgggqaq}\\
 
 \textbf{\large Sample Output}\\
 \texttt{ac\\hahadsagggggqaq }\\
@@ -328,15 +349,16 @@ For every test case, output the final content of the file.\\
 
 \begin{problem}The Crafty TA
 
-Given $2$ positive integers $N$, $k$, you can obtain a new integer by removing $k$ digits from $N$. Please output the least one that does not contain any leading zeros.\\
+As a crafty TA, Maoq would like to give students as few points as possible. The rules of giving points are as below.
+If a student got $N$ points originally, Maoq can adjust his points by removing $k$ arbitrary digits, but this removal shouldn't yield any leading zero. Given $N$ and $k$, how many points would the student get?.\\
 
 \textbf{\large Input Format}\\
 $2$ integers, $N$ and $k$.\\
 $1\leq N\leq 10^{10^8}$\\
-$1\leq k\leq\min(\log_{10}n, 10^3)$\\
+$1\leq k\leq\min(\ceil{\log_{10}(n+1)}, 10^3)$\\
 
 \textbf{\large Output Format}\\
-An $(\log_{10}n-k)$-digit number, which is the least number you can obtain by removing $k$ digits from $N$.\\
+An integer, which is the number of points the student would get.\\
 
 \textbf{\large Sample Input}\\
 \texttt{30400 2}\\
