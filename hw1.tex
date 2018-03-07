@@ -11,6 +11,7 @@
 \usepackage{subfig}
 \usepackage{listing}
 \usepackage{enumitem}
+\usepackage{hyperref}
 \usepackage{url}
 \usepackage{tcolorbox}
 \usepackage{tikz}
@@ -18,6 +19,7 @@
 \lstset{basicstyle=\ttfamily}
 \usetikzlibrary{calc,shapes.multipart,chains,arrows}
 
+\newcommand{\points}[1]{ ($#1$ \textit{points}) } 
 
 \usepackage{fontspec}
 %\setmainfont{Gill Sans MT}
@@ -54,15 +56,20 @@
 \textbf{\Large Homework \#1\\} 
 \vspace{5pt}
 \textbf{Release: Tuesday, March 13, 2018}\\
-\textbf{Due: Sunday, March 25, 2018}\\
-TA E-mail: dsa1@csie.ntu.edu.tw\\
+\textbf{Due: 00:00:00, Monday, March 26, 2018}\\
+TA E-mail: \href{mailto:dsa1@csie.ntu.edu.tw}{\texttt{dsa1@csie.ntu.edu.tw}}\\
 \vspace{5pt}
 \textbf{\headline{Rules and Instructions}}
 \begin{itemize}
     \item In homework 1, the problem set contains $5$ problems and is divided into two parts, non-programming part (problem 1, 2, 3)  and programming part (problem 4, 5). 
-    \item For problems in non-programming part, you should type your solutions and combine them in ONE pdf file.
-    \item For problems in programming part, you should ...
+    \item Please go to \textit{DSA Judge} (\url{https://dsa.csie.org}) and complete the first problem to get familiar with the usage of the judge system.
+    \item For problems in non-programming part, you should type your solutions and combine them in ONE pdf file, and then hand it in via the judge system. Your solution must be as simple as possible. At the TAs' discretion, too complicated will be counted as wrong.
+    \item For problems in programming part, you should write your code in C programming language, and then hand them in via the judge system . The compile command of the judge system will be \texttt{gcc code.c -std=c99 -O2 -lm TBD}.
     \item Discussions with others are encouraged. However, you should write down your solutions in your own words. In addition, for each problem, you have to specify the references (the Internet URL you consulted with or the people you discussed with) on the first page of your solution to that problem.
+    \item The score of the part that is summitted after the deadline will get some penalties according to the following rule:
+    \begin{center}
+        $LateScore = (\dfrac{86400-DelayTime}{86400})OriginalScore$
+    \end{center}
 \end{itemize}
 
 \end{center}
@@ -75,49 +82,47 @@ TA E-mail: dsa1@csie.ntu.edu.tw\\
 \end{center}
 \vspace{10pt}
 
-\begin{problem} Stack/Queue
+\begin{problem} Stack/Queue \points{15}
 
     You have learned in class that stack is a FILO/LIFO data structure and that queue is a FIFO/LILO data structure.
-    Please design an algorithm(pseudo code) under the following scenarios. They are all independent.
+    Please describe a procedure under the following scenarios. They are all independent.
     You can assume that all data structure mentioned below have infinite capacity and all operations are valid.
     That is, no \texttt{Pop()} will be called on an empty stack and no \texttt{DeQueue()} will be called on an empty queue.
 \begin{enumerate}[label=\alph*.]
-    \item Please use $2$ queues and $O(1)$ extra space to simulate a stack. That is, please implement \texttt{Pop()}, \texttt{Push()} and \texttt{IsEmpty()} of a stack.
-    \item Please use $2$ stacks and $O(1)$ extra space to simulate a queue. That is, please implement \texttt{DeQueue()}, \texttt{EnQueue()} and \texttt{IsEmpty()} of a queue.
+    \item \points{4}Please use $2$ queues and $O(1)$ extra space to simulate a stack. That is, please implement \texttt{Pop()}, \texttt{Push()} and \texttt{IsEmpty()} of a stack.
+    \item \points{4}Please use $2$ stacks and $O(1)$ extra space to simulate a queue. That is, please implement \texttt{DeQueue()}, \texttt{EnQueue()} and \texttt{IsEmpty()} of a queue.
 \end{enumerate}
     You are given a stack $S$ and a queue $Q$. They both have infinite capacity, and they both store positive integers. The numbers of elements of $S$ and $Q$ will both be not greater than $n$. Please describe a procedure to determine whether there exists common element between $S$ and $Q$ in the following scenarios. If there exists, please output arbitrarily one of the common elements. If not, please output $0$.  The scenarios are independent, and you can answer them in any order.
 \begin{enumerate}[label=\alph*.]
     \setcounter{enumi}{2}
-\item Guaranteed that the elements in $S$, from bottom to top, are strictly increasing, and the elements in $Q$, from rear to front, are also strictly \textbf{increasing}. In $O(n)$ time, $O(1)$ extra space.
-\item Guaranteed that the elements in $S$, from bottom to top, are strictly increasing, while the elements in $Q$, from rear to front, are strictly \textbf{decreasing}. In $O(n)$ time, $O(1)$ extra space.
+\item \points{2}Guaranteed that the elements in $S$, from bottom to top, are strictly increasing, and the elements in $Q$, from rear to front, are also strictly \textbf{increasing}. In $O(n)$ time, $O(1)$ extra space.
+\item \points{5}Guaranteed that the elements in $S$, from bottom to top, are strictly increasing, while the elements in $Q$, from rear to front, are strictly \textbf{decreasing}. In $O(n)$ time, $O(1)$ extra space.
 \end{enumerate}
 \end{problem}
 \newpage
 
-\begin{problem}Complexity
+\begin{problem}Complexity\points{20}
 
 In this part, if you would like to use any theorem which is not mentioned in class, please prove it in advance.
 \begin{center}
-$\lg(n) = \log_2(n)$, $\ln(n) = \log_e(n)$, $\log(n) = \log_{10}(n)$
+($\lg(n) = \log_2(n)$, $\ln(n) = \log_e(n)$, $\log(n) = \log_{10}(n)$)
 \end{center}
 
 \begin{enumerate}[label=\arabic*.]
-\item Please rank the following functions by the order of growth. No proof or extra statement is needed.
+\item \points{1}Please rank the following functions by the order of growth. No proof or extra statement is needed.
     \begin{center}$4^n, 8^n, n^2, n^n, n\lg n, e^{\ln(n)}, 2^{\sqrt{\lg n}}$\end{center}
-\item Prove that $\log(n!) = O(n\lg n)$ (deprecated)
-\item Prove or disprove the following statements. You should provide a formal proof or a counterexample for each statement. Please note that in the following statements, $f(n), g(n), i(n), j(n)$ are \textit{non-negative}, \textit{monotonically increasing} functions.\\
-\textit{non-negative}: The union of ranges of these functions is a subset of $\mathbb{R}^+\cup\{0\}$\\
-\textit{monotonically increasing}:\\ $n_1>n_2 \implies f(n_1)\geq f(n_2), g(n_1)\geq g(n_2), i(n_1)\geq i(n_2), j(n_1)\geq j(n_2)$.
+\item \points{11}Prove or disprove the following statements. You should provide a formal proof or a counterexample for each statement. Please note that in the following statements, $f(n), g(n), i(n), j(n)$ are \textit{non-negative}, \textit{monotonically increasing} functions.\\
+\textit{non-negative}: The of ranges of these functions are all non-negative.\\
+\textit{monotonically increasing}:\\ If $n_1>n_2$, then $f(n_1)\geq f(n_2), g(n_1)\geq g(n_2), i(n_1)\geq i(n_2), j(n_1)\geq j(n_2)$.
     \begin{enumerate}[label=\alph*.]
-    \item $100n^2+300n = O(n^2)$.
-    \item If $f(n) = O(i(n))$, $g(n) = O(j(n))$, then $f(n) - g(n) = O(i(n) - j(n))$.
-    \item If $f(n) = O(g(n))$, then $f^2 = O(g^2)$.
-    \item If $f(n) = \Omega(i(n))$, $g(n) = \Omega(j(n))$, then $f(n) + g(n) = \Omega(i(n) + j(n))$
-    \item If $f(n) = O(g(n))$, then $2^{f(n)} = O(2^{g(n)})$
-    \item If $2^{f(n)} = O(2^{g(n)})$, then $f(n) = O(g(n))$
-    \item $f(n) + g(n) = \Theta(\max(f(n), g(n)))$
+    \item \points{1}If $f(n) = O(i(n))$, $g(n) = O(j(n))$, then $f(n) - g(n) = O(i(n) - j(n))$.
+    \item \points{2}If $f(n) = O(g(n))$, then $f^2 = O(g^2)$.
+    \item \points{2}If $f(n) = \Omega(i(n))$, $g(n) = \Omega(j(n))$, then $f(n) + g(n) = \Omega(i(n) + j(n))$
+    \item \points{1.5}If $f(n) = O(g(n))$, then $2^{f(n)} = O(2^{g(n)})$
+    \item \points{1.5}If $2^{f(n)} = O(2^{g(n)})$, then $f(n) = O(g(n))$
+    \item \points{2}$f(n) + g(n) = \Theta(\max(f(n), g(n)))$
     \end{enumerate}
-\item Define a function $f(n)$ as below:
+\item \points{4}Define a function $f(n)$ as below:
     \begin{equation*}
     f(n) = 
            \begin{cases}
@@ -129,7 +134,7 @@ Please find out the tightest bound of $f(n)$ with $\Theta$ notation.
 You should provide a proof to get credits.
 Answers without any proof will NOT get any credits.
 (Note: If you want to use the Master Theorem, then you should prove it first)
-\item Define a function $T(n)$ as below:
+\item \points{5}Define a function $T(n)$ as below:
     \begin{equation*}
     T(n) = 
            \begin{cases}
@@ -137,7 +142,10 @@ Answers without any proof will NOT get any credits.
            2T(\floor{\sqrt{n}}) + \lg n &\text{, otherwise}
            \end{cases}
     \end{equation*}
-Prove that $T(n) = \Theta(\lg n \times \lg\lg n)$
+Prove that $T(n) = O(\lg n \times \lg\lg n)$.
+
+(Hint: Transformation of variables.)
+
 
 \end{enumerate}
 
@@ -146,10 +154,10 @@ Prove that $T(n) = \Theta(\lg n \times \lg\lg n)$
 
 \newpage
 
-\begin{problem} Linked List.
+\begin{problem} Linked List \points{25}
 
 \begin{enumerate}[label=\arabic*.]
-\item You are given the heads of two read-only linked list $A$ and $B$. Both $A$ and $B$ are loop-free and store positive integers. The integers in $A$, from head to tail, form a sequence $\langle a \rangle$, and the integers in $B$, from tail to head, form a sequence $\langle b \rangle$. Guaranteed that $\langle a\rangle$ and $\langle b\rangle$ are of same length $n$, and $\exists!\, i\ \text{ s.t. } a_i \neq b_i$. Please describe a procedure to find $i$.\\
+\item \points{5}You are given the heads of two read-only linked lists $A$ and $B$. Both $A$ and $B$ are loop-free and store positive integers. The integers in $A$, from head to tail, form a sequence $\langle a \rangle$, and the integers in $B$, from tail to head, form a sequence $\langle b \rangle$. Guaranteed that $\langle a\rangle$ and $\langle b\rangle$ are of same length $n$, and there exists exactly one $i\ \text{ s.t. } a_i \neq b_i$. Please describe a procedure to find $i$.\\
 
         $A$: 
        \begin{tikzpicture}[list/.style={rectangle split, rectangle split parts=2, draw, rectangle split horizontal}, >=stealth, start chain]
@@ -189,7 +197,7 @@ Prove that $T(n) = \Theta(\lg n \times \lg\lg n)$
         Both $A$ and $B$ are read-only, you cannot modify them.\\
         In $o(n^2)$ time, $O(1)$ extra space.
 
-\item You are given the heads of two read-only linked list $A$ and $B$. They might contain loop. Please follow the guide and design a procedure to determine whether the shapes of the linked lists are identical.\\
+\item \points{20}You are given the heads of two read-only linked list $A$ and $B$. They might contain loop. Please follow the guide and design a procedure to determine whether the shapes of the linked lists are identical.\\
         For example, among the following linked lists, linked list $\beta$ and linked list $\delta$ are identical in shape. You may discover that a linked list contains at most one loop, and if there is one, then the loop must appears at the end. Thus, two linked lists are identical in shape if and only if their "chain parts" and the "loop parts" are of equal size respectively.\\
 
         \begin{tikzpicture}[list/.style={rectangle split, rectangle split parts=2, draw, rectangle split horizontal}, >=stealth, start chain]
@@ -267,8 +275,10 @@ Prove that $T(n) = \Theta(\lg n \times \lg\lg n)$
 
         Both $A$ and $B$ are read-only, you cannot modify them.
     \begin{enumerate}[label=\alph*.]
-        \item Please complete the C function below to determine whether the given linked list has a loop. If so, return a pointer to an arbitrary node on the loop.  Otherwise, return \textit{NULL}.\\
+        \item \points{5}Please complete the C function below to determine whether the given linked list has a loop. If so, return a pointer to an arbitrary node on the loop.  Otherwise, return \textit{NULL}.\\
         In $O(n)$ time, $O(1)$ extra space, while $n$ is the number of nodes of the given linked list. Please note that the only input is the head of the linked list, and you are ignorant of $n$.
+
+        (Hint: Consider two pointers pointing to the head initially and moving at different speed.)
 
 \begin{lstlisting}
 typedef struct list_node{
@@ -280,7 +290,7 @@ typedef struct list_node{
 }
 \end{lstlisting}
 
-        \item Please complete the C function below to determine the length of the loop of the given linked list. The length of the loop is defined as the number of nodes on the loop.\\
+        \item \points{3}Please complete the C function below to determine the length of the loop of the given linked list. The length of the loop is defined as the number of nodes on the loop. You are free to use function \texttt{isLoop()} defined above.\\
         In $O(n)$ time, $O(1)$ extra space.
 
 \begin{lstlisting}
@@ -292,8 +302,8 @@ unsigned int loopLength(list_node *head){
         Please describe a procedure that determine whether $A$ and $B$ are of same shape. Your procedure should takes the heads of $A$ and $B$ as its input. If they are of same shape, output $1$, otherwise, output $0$. In:
 \begin{enumerate}[label=\alph*.]
     \setcounter{enumii}{2}
-        \item $O(n \lg n)$ time, $O(1)$ extra space.
-        \item $O(n)$ time, $O(n)$ extra space.\\
+        \item \points{6}$O(n \lg n)$ time, $O(1)$ extra space.
+        \item \points{6}$O(n)$ time, $O(n)$ extra space.\\
     \noindent $n$ is the sum of the numbers of nodes of $A$ and $B$, and you are ignorant of $n$. You are free to use functions \texttt{loopLength()} and \texttt{isLoop()} defined above.
     \end{enumerate}
 
@@ -306,11 +316,11 @@ unsigned int loopLength(list_node *head){
 \begin{center}
 \textbf{\headline{\large Programming Part}}
 \end{center}
-\begin{problem}Notepad -{}-
+\begin{problem}Notepad -{}- \points{20}
 
-You are required to simulate a very lightweight text editor: \textit{Notepad-}-. The following table shows all the effective keys in this editor and their effects. All other keys are ineffective and {\bfseries should be ignored} by the editor.
+You are required to simulate a very lightweight text editor: \textit{Notepad-}-. The following table shows all the effective keys in this editor and their effects. All the other keys are ineffective and {\bfseries should be ignored} by the editor.
 
-Note that in Notepad--, the cursor is NOT supposed to lie right upon a character; instead, it's always between two characters or at the beginning/end of file.
+Note that in \textit{Notepad-}-, the cursor is NOT supposed to lie just upon a character; instead, it's always between two characters or at the beginning/end of file.
 
 
 \begin{table}[h]
@@ -320,8 +330,8 @@ Note that in Notepad--, the cursor is NOT supposed to lie right upon a character
 \texttt{a-z} & Overwrite the selected segment with the character; if nothing is selected, simply write the character. After that, move the cursor to the end of the inserted character, and exit \textit{selection mode}.\\\hline
 \texttt{H}   & Move the cursor leftward by one. If the cursor is at the beginning of the file, do nothing.\\\hline
 \texttt{L}   & Move the cursor rightward by one. If the cursor is at the end of the file, do nothing.\\\hline
-\texttt{V}   & Enter \textit{selection mode}.\\\hline
-\texttt{D}   & Cut the selected segment and overwrite the clipboard with it, and then exit \textit{selection mode}.\\\hline
+\texttt{V}   & Enter \textit{selection mode}. If currently in \textit{selection mode}, exit \textit{selection mode}.\\\hline
+\texttt{D}   & If nothing is selected, do nothing. Otherwise, cut the selected segment and overwrite the clipboard with it, and then exit \textit{selection mode}.\\\hline
 \texttt{P}   & Overwrite the selected segment with the content in the clipboard; if nothing is selected, simply paste the clipboard content then clear the clipboard. Move the cursor to the end of the pasted content, and exit \textit{selection mode}.\\\hline
 \end{tabularx}
 \end{table}
@@ -330,7 +340,7 @@ Note that the selection mode works just like keeping <shift> key pressed in Note
 Suppose \textit{Arvin} just open an empty file with \textit{Notepad-}-, and the clipboard is initially empty. Given the series of keys pressed by \textit{Arvin}, what would the file eventually be?\\
 
 \textbf{\large Input Format}\\
-The first line is an integer $T$, indicating that there are $T$ test cases. For every test cases there is  a string composed of lowercase and uppercase characters, which is the series of keys Arvin keys in.\\
+The first line is an integer $T$, indicating that there are $T$ test cases. For every test case, there is a string composed of lowercase and uppercase characters, which is the series of keys Arvin keys in.\\
 
 \textbf{\large Output Format}\\
 For every test case, output the final content of the file.\\
@@ -338,6 +348,7 @@ For every test case, output the final content of the file.\\
 \textbf{\large Input Constraint}\\
     $T \leq 10$.\\
     $\text{length of each string}\leq 10^7$\\
+    TBD.\\
 
 \textbf{\large Sample Input}\\
 \texttt{ 2\\tleVH>>HHwaVHBBHac\\dsahahaVHHHHDggHHHHHPLLLLLgggqaq}\\
@@ -347,18 +358,24 @@ For every test case, output the final content of the file.\\
 \end{problem}
 \newpage
 
-\begin{problem}The Crafty TA
+\begin{problem}The Crafty TA \points{20}
 
 As a crafty TA, Maoq would like to give students as few points as possible. The rules of giving points are as below.
-If a student got $N$ points originally, Maoq can adjust his points by removing $k$ arbitrary digits, but this removal shouldn't yield any leading zero. Given $N$ and $k$, how many points would the student get?.\\
+The student got $N$ points originally, and Maoq can adjust his points by removing $k$ arbitrary digits, but this removal shouldn't yield any leading zero. Given $N$ and $k$, how many points would the student get?.\\
 
 \textbf{\large Input Format}\\
-$2$ integers, $N$ and $k$.\\
+$2$ integers, $N$ and $k$. Both $N$ and $k$ will not contain any leading zero.\\
 $1\leq N\leq 10^{10^8}$\\
-$1\leq k\leq\min(\ceil{\log_{10}(n+1)}, 10^3)$\\
+$1\leq k\leq\log_{10}(n+1)$\\
 
 \textbf{\large Output Format}\\
 An integer, which is the number of points the student would get.\\
+
+\textbf{\large Input Constraint}\\
+For 5\% of the testcases, $len(N)\leq 10$, and $N$ contains no zero.\\
+For 30\% of the testcases, $len(N)\leq 10^4$, and $N$ contains no zero.\\
+For 50\% of the testcases, $len(N)\leq 10^4$.\\
+For 100\% of the testcases, $len(N)\leq 10^8, 1\leq k< \log_{10}(n+1)$.\\
 
 \textbf{\large Sample Input}\\
 \texttt{30400 2}\\
