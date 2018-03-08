@@ -63,12 +63,12 @@ TA E-mail: \href{mailto:dsa1@csie.ntu.edu.tw}{\texttt{dsa1@csie.ntu.edu.tw}}\\
 \begin{itemize}
     \item In homework 1, the problem set contains $5$ problems and is divided into two parts, non-programming part (problem 1, 2, 3)  and programming part (problem 4, 5). 
     \item Please go to \textit{DSA Judge} (\url{https://dsa.csie.org}) and complete the first problem to get familiar with the usage of the judge system.
-    \item For problems in non-programming part, you should type your solutions and combine them in ONE pdf file, and then hand it in via the judge system. Your solution must be as simple as possible. At the TAs' discretion, too complicated will be counted as wrong.
-    \item For problems in programming part, you should write your code in C programming language, and then hand them in via the judge system . The compile command of the judge system will be \texttt{gcc code.c -std=c99 -O2 -lm TBD}.
+    \item For problems in non-programming part, you should combine your solutions in ONE pdf file, and then hand it in via the judge system. Your solution must be as simple as possible. At the TAs' discretion, too complicated solutions will be counted as wrong.
+    \item For problems in programming part, you should write your code in C programming language, and then hand them in via the judge system . The compilation command of the judge system will be \texttt{gcc main.c -static -std=c11 -O2 -lm}.
     \item Discussions with others are encouraged. However, you should write down your solutions in your own words. In addition, for each problem, you have to specify the references (the Internet URL you consulted with or the people you discussed with) on the first page of your solution to that problem.
-    \item The score of the part that is summitted after the deadline will get some penalties according to the following rule:
+    \item The score of the part that is submitted after the deadline will get some penalties according to the following rule:
     \begin{center}
-        $LateScore = (\dfrac{86400-DelayTime}{86400})OriginalScore$
+        $LateScore = (\dfrac{86400-DelayTime (sec.)}{86400})OriginalScore$
     \end{center}
 \end{itemize}
 
@@ -111,8 +111,8 @@ In this part, if you would like to use any theorem which is not mentioned in cla
 \begin{enumerate}[label=\arabic*.]
 \item \points{1}Please rank the following functions by the order of growth. No proof or extra statement is needed.
     \begin{center}$4^n, 8^n, n^2, n^n, n\lg n, e^{\ln(n)}, 2^{\sqrt{\lg n}}$\end{center}
-\item \points{11}Prove or disprove the following statements. You should provide a formal proof or a counterexample for each statement. Please note that in the following statements, $f(n), g(n), i(n), j(n)$ are \textit{non-negative}, \textit{monotonically increasing} functions.\\
-\textit{non-negative}: The of ranges of these functions are all non-negative.\\
+\item \points{10}Prove or disprove the following statements. You should provide a formal proof or a counterexample for each statement. Please note that in the following statements, $f(n), g(n), i(n), j(n)$ are \textit{non-negative}, \textit{monotonically increasing} functions.\\
+\textit{non-negative}: The ranges of these functions are all non-negative.\\
 \textit{monotonically increasing}:\\ If $n_1>n_2$, then $f(n_1)\geq f(n_2), g(n_1)\geq g(n_2), i(n_1)\geq i(n_2), j(n_1)\geq j(n_2)$.
     \begin{enumerate}[label=\alph*.]
     \item \points{1}If $f(n) = O(i(n))$, $g(n) = O(j(n))$, then $f(n) - g(n) = O(i(n) - j(n))$.
@@ -122,29 +122,31 @@ In this part, if you would like to use any theorem which is not mentioned in cla
     \item \points{1.5}If $2^{f(n)} = O(2^{g(n)})$, then $f(n) = O(g(n))$
     \item \points{2}$f(n) + g(n) = \Theta(\max(f(n), g(n)))$
     \end{enumerate}
-\item \points{4}Define a function $f(n)$ as below:
-    \begin{equation*}
-    f(n) = 
-           \begin{cases}
-           1 &\text{ , if } n = 1\\
-           2f(\floor{\frac{n}{2}}) + n &\text{ , otherwise}
-           \end{cases}
-    \end{equation*}
-Please find out the tightest bound of $f(n)$ with $\Theta$ notation.
-You should provide a proof to get credits.
-Answers without any proof will NOT get any credits.
-(Note: If you want to use the Master Theorem, then you should prove it first)
-\item \points{5}Define a function $T(n)$ as below:
-    \begin{equation*}
-    T(n) = 
-           \begin{cases}
-           1 &\text{, when } n = 1\\
-           2T(\floor{\sqrt{n}}) + \lg n &\text{, otherwise}
-           \end{cases}
-    \end{equation*}
-Prove that $T(n) = O(\lg n \times \lg\lg n)$.
+    \item 
+    \begin{enumerate}[label=\alph*.]
+        \item \points{4}Define a function $f(n)$ as below:
+        \begin{equation*}
+        f(n) = 
+               \begin{cases}
+               1 &\text{ , if } n = 1\\
+               2f(\floor{\frac{n}{2}}) + n &\text{ , otherwise}
+               \end{cases}
+        \end{equation*}
+    Please find out the tightest bound of $f(n)$ with $\Theta$ notation.
+    You should provide a proof to get credits.
+    Answers without any proof will NOT get any credits.
+    \item \points{5}Define a function $T(n)$ as below:
+        \begin{equation*}
+        T(n) = 
+               \begin{cases}
+               1 &\text{, when } n = 1\\
+               2T(\floor{\sqrt{n}}) + \lg n &\text{, otherwise}
+               \end{cases}
+        \end{equation*}
+    Prove that $T(n) = O(\lg n \times \lg\lg n)$.
+    (Hint: Transformation of variables.)
+    \end{enumerate}
 
-(Hint: Transformation of variables.)
 
 
 \end{enumerate}
@@ -276,7 +278,7 @@ Prove that $T(n) = O(\lg n \times \lg\lg n)$.
         Both $A$ and $B$ are read-only, you cannot modify them.
     \begin{enumerate}[label=\alph*.]
         \item \points{5}Please complete the C function below to determine whether the given linked list has a loop. If so, return a pointer to an arbitrary node on the loop.  Otherwise, return \textit{NULL}.\\
-        In $O(n)$ time, $O(1)$ extra space, while $n$ is the number of nodes of the given linked list. Please note that the only input is the head of the linked list, and you are ignorant of $n$.
+        In $O(n)$ time, $O(1)$ extra space, while $n$ is the number of nodes of the given linked list. Please note that the only input is the head of the linked list, and you are ignorant of the value of $n$.
 
         (Hint: Consider two pointers pointing to the head initially and moving at different speed.)
 
@@ -304,7 +306,7 @@ unsigned int loopLength(list_node *head){
     \setcounter{enumii}{2}
         \item \points{6}$O(n \lg n)$ time, $O(1)$ extra space.
         \item \points{6}$O(n)$ time, $O(n)$ extra space.\\
-    \noindent $n$ is the sum of the numbers of nodes of $A$ and $B$, and you are ignorant of $n$. You are free to use functions \texttt{loopLength()} and \texttt{isLoop()} defined above.
+    \noindent $n$ is the sum of the numbers of nodes of $A$ and $B$, and you are ignorant of the value of $n$. You are free to use functions \texttt{loopLength()} and \texttt{isLoop()} defined above.
     \end{enumerate}
 
 \end{enumerate}
@@ -361,21 +363,21 @@ For every test case, output the final content of the file.\\
 \begin{problem}The Crafty TA \points{20}
 
 As a crafty TA, Maoq would like to give students as few points as possible. The rules of giving points are as below.
-The student got $N$ points originally, and Maoq can adjust his points by removing $k$ arbitrary digits, but this removal shouldn't yield any leading zero. Given $N$ and $k$, how many points would the student get?.\\
+The student got $N$ points originally, and Maoq can adjust his points by removing $k$ arbitrary digits, but this removal shouldn't yield any leading zeros. Given $N$ and $k$, what's the minimum points the student would get?.\\
 
 \textbf{\large Input Format}\\
-$2$ integers, $N$ and $k$. Both $N$ and $k$ will not contain any leading zero.\\
-$1\leq N\leq 10^{10^8}$\\
-$1\leq k\leq\log_{10}(n+1)$\\
+The input contains $2$ integers, $N$ and $k$. Both $N$ and $k$ will not contain any leading zeros.\\
+$1\leq N\leq 10^{100000000}$\\
+$1\leq k<len(N)$\\
 
 \textbf{\large Output Format}\\
-An integer, which is the number of points the student would get.\\
+An integer, which is the minimum points the student would get.\\
 
 \textbf{\large Input Constraint}\\
-For 5\% of the testcases, $len(N)\leq 10$, and $N$ contains no zero.\\
-For 30\% of the testcases, $len(N)\leq 10^4$, and $N$ contains no zero.\\
+For 5\% of the testcases, $len(N)\leq 10$, and each digit of $N$ is not zero.\\
+For 30\% of the testcases, $len(N)\leq 10^4$, and each digit of $N$ is not zero.\\
 For 50\% of the testcases, $len(N)\leq 10^4$.\\
-For 100\% of the testcases, $len(N)\leq 10^8, 1\leq k< \log_{10}(n+1)$.\\
+For 100\% of the testcases, no other constraints.\\
 
 \textbf{\large Sample Input}\\
 \texttt{30400 2}\\
