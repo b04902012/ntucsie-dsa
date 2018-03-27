@@ -8,7 +8,6 @@
 \usepackage{clrscode3e}
 \usepackage{graphicx}
 \usepackage{listings}
-\usepackage{subfig}
 \usepackage{listing}
 \usepackage{enumitem}
 \usepackage{hyperref}
@@ -20,6 +19,7 @@
 \usetikzlibrary{calc,shapes.multipart,chains,arrows}
 
 \newcommand{\points}[1]{ ($#1$ \textit{points}) } 
+\newcommand{\get}{\leftarrow} 
 
 \usepackage{fontspec}
 %\setmainfont{Gill Sans MT}
@@ -32,6 +32,7 @@
 
 \theoremstyle{definition}
 \newtheorem{problem}{\textbf{Problem}}
+\newcommand{\solution}{\textbf{Solution.}} 
 \newtheorem{example}{Example}
 
 
@@ -202,6 +203,26 @@ For each problem, if it's not trivial, please briefly explain why your procedure
         Your procedure should take the heads of $A$ and $B$ as its input, then output $i$, while $i$ is the index mentioned above.
         Both $A$ and $B$ are read-only, you cannot modify them.\\
         In $o(n^2)$ time, $O(1)$ extra space.
+
+    \textbf{Solution.}
+
+    It's easy to verify that $\forall P\subseteq [1,n]$, $\sum\limits_{j\in P}a_j=\sum\limits_{j\in P}b_j$ iff $i\notin P$.
+
+    This gives a motivation to start a binary search to find the smallest $P$ that contains $i$, that is, the set that contains $i$ itself.
+\begin{codebox}
+\li Calculate $A.tail$ and $B.tail$
+\li $leftA \get A.head$
+\li $rightA\get A.tail$
+\li $leftB \get B.head$
+\li $rightB\get B.tail$
+\li $length\get n$
+\li \While $length > 1:$\Do
+\li     $halfLength\get\floor{length/2}$
+\li     $sumA, sumB\get 0$
+\li     
+    \End
+    
+\end{codebox}
 
 \item \points{20}You are given the heads of two read-only singly linked list $A$ and $B$. The tail node might not point to \textit{NULL} but point to another node, so they might contain loop. Please follow the guide and design a procedure to determine whether the shapes of the linked lists are identical.\\
         For example, among the following linked lists, linked list $\beta$ and linked list $\delta$ are identical in shape. You may discover that a linked list contains at most one loop, and if there is one, then the loop must appears at the end. Thus, two linked lists are identical in shape if and only if their "chain parts" and the "loop parts" are of equal sizes respectively, while the data they store are irrelevant to their shapes.\\
