@@ -6,9 +6,33 @@
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{clrscode3e}
+\newcommand{\Output}{\kw{output }}
 \usepackage{graphicx}
+\usepackage{xcolor}
 \usepackage{listings}
 \usepackage{listing}
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{1,1,1}
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{mGreen},
+    keywordstyle=\textbf,
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=C
+}
 \usepackage{enumitem}
 \usepackage{hyperref}
 \usepackage{url}
@@ -210,17 +234,32 @@ For each problem, if it's not trivial, please briefly explain why your procedure
 
     This gives a motivation to start a binary search to find the smallest $P$ that contains $i$, that is, the set that contains $i$ itself.
 \begin{codebox}
-\li Calculate $A.tail$ and $B.tail$
+\Procname{$\proc{Procedure 4.1}(A.head, B.head)$}
 \li $leftA \get A.head$
-\li $rightA\get A.tail$
 \li $leftB \get B.head$
-\li $rightB\get B.tail$
+\li $ans\get 1$
 \li $length\get n$
-\li \While $length > 1:$\Do
+\li \While $length > 1$\Do
 \li     $halfLength\get\floor{length/2}$
+\li     $middleA\get A.head$
+\li     $middleB\get B.head$
 \li     $sumA, sumB\get 0$
-\li     
+\li     \For $i=1$ \To $halfLength$\Do
+\li         $sumA\get sumA+middleA.data$
+\li         $sumB\get sumB+middleB.data$
+\li         $middleA\get middleA.next$
+\li         $middleB\get middleB.next$
+        \End
+\li     \If $sumA=sumB$\Then
+\li         $leftA\get middleA$
+\li         $leftB\get middleB$
+\li         $ans\get ans+halfLength$
+\li         $length\get length-halfLength$
+\li     \Else
+            $length\get halfLength$
+        \End
     \End
+\li \Output $ans$
     
 \end{codebox}
 
@@ -307,23 +346,37 @@ For each problem, if it's not trivial, please briefly explain why your procedure
 
         (Hint: Consider two pointers pointing to the head initially and moving at different speed.)
 
-\begin{lstlisting}
+\begin{lstlisting}[style=CStyle]
 typedef struct listnode{
     int data;
     struct listnode *next;
 }ListNode;
 
 ListNode* isLoop(ListNode* head){
-    //fill the blank here
+    ListNode* ptr_slow, ptr_fast=head;
+    while(ptr_slow!=ptr_fast&&ptr_fast){
+        ptr_slow=ptr_slow->next;
+        ptr_fast=ptr_fast->next;
+        if(ptr_fast->next)ptr_fast=ptr_fast->next;
+    }
+    return ptr_fast;
 }
 \end{lstlisting}
 
         \item \points{3}Please complete the C function below to determine the length of the loop of the given linked list. The length of the loop is defined as the number of nodes on the loop. You are free to use function \texttt{isLoop()} defined above.\\
         In $O(n)$ time, $O(1)$ extra space.
 
-\begin{lstlisting}
+\begin{lstlisting}[style=CStyle]
 unsigned int loopLength(ListNode* head){
-    //fill the blank here
+    ListNode* loopNode=isLoop(head);
+    if(!loopNode)return 0;
+    int l=1;
+    ListNode* tmpNode=loopNode->next;
+    while(tmpNode!=loopNode){
+        l++;
+        tmpNode=tmpNode->next;
+    }
+    return l;
 }
 \end{lstlisting}
 \end{enumerate}
@@ -331,8 +384,57 @@ unsigned int loopLength(ListNode* head){
 \begin{enumerate}[label=\alph*.]
     \setcounter{enumii}{2}
         \item \points{6}$O(n \lg n)$ time, $O(1)$ extra space.
+\begin{codebox}
+
+\Procname{$\proc{Chain-Length-c}(head)$}
+\li $left\get 1$
+\li $right\get 1$
+\li $loopNode\get isLoop(head)$
+\li $tmpNode\get head$
+\li \While $tmpNode\neq loopNode$ \Do
+\li     $tmpNode\get tmpNode.next$
+\li     $right\get right+1$
+    \End
+\li \If $loopNode=NULL$ \Then
+\li     \Return $right-1$
+    \End
+\li \While $right-left>1$ \Do
+\li     $middle\get \floor{(left+right)/2}$
+\li     \If $Find-Node(head,middle)=Find-Node(head,middle+loopLength(head))$ \Then
+\li         $right\get middle$
+\li     \Else
+\li         $left\get middle$
+        \End
+    \End
+\li \Return $left$
+
+    
+\end{codebox}
         \item \points{6}$O(n)$ time, $O(n)$ extra space.\\
     \noindent $n$ is the sum of the numbers of nodes of $A$ and $B$, and you are ignorant of the value of $n$. You are free to use functions \texttt{loopLength()} and \texttt{isLoop()} defined above.
+\begin{codebox}
+\Procname{$\proc{Chain-Length-d}(head)$}
+\li $loopNode\get isLoop(head)$
+\li $tmpNode\get head$
+\li $index\get 1$
+\li \While $tmpNode\neq loopNode$ \Do
+\li     $tmpNode\get tmpNode.next$
+\li     $index\get index+1$
+    \End
+\li \If $loopNode=NULL$ \Then
+\li     \Return $index-1$
+    \End
+\li let $chainArray[1\twodots index]$ and $loopArray[1\twodots loopLength(head)]$ be new arrays
+\li $tmpNode\get head$
+\li \For $i=1$ \To $index$ \Do
+\li     $chainArray[i]\get tmpNode$
+\li     $tmpNode\get tmpNode.next$
+    \End
+\li \For $i=1$ \To $loopLength(head)$ \Do
+\li     $loopArray[i]\get tmpNode$
+\li     $tmpNode\get tmpNode.next$
+\li \End
+\end{codebox}
     \end{enumerate}
 
 \end{enumerate}
