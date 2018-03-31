@@ -366,6 +366,8 @@ ListNode* isLoop(ListNode* head){
         \item \points{3}Please complete the C function below to determine the length of the loop of the given linked list. The length of the loop is defined as the number of nodes on the loop. You are free to use function \texttt{isLoop()} defined above.\\
         In $O(n)$ time, $O(1)$ extra space.
 
+\solution
+
 \begin{lstlisting}[style=CStyle]
 unsigned int loopLength(ListNode* head){
     ListNode* loopNode=isLoop(head);
@@ -384,43 +386,65 @@ unsigned int loopLength(ListNode* head){
 \begin{enumerate}[label=\alph*.]
     \setcounter{enumii}{2}
         \item \points{6}$O(n \lg n)$ time, $O(1)$ extra space.
-\begin{codebox}
+        \item \points{6}$O(n)$ time, $O(n)$ extra space.\\
+    \noindent $n$ is the sum of the numbers of nodes of $A$ and $B$, and you are ignorant of the value of $n$. You are free to use functions \texttt{loopLength()} and \texttt{isLoop()} defined above.
 
-\Procname{$\proc{Chain-Length-c}(head)$}
+\solution
+    
+    To make the notation consistent, let's 
+
+    For simplicity, let's define two procedure \proc{Find-Node} and \proc{Find-Index} first.
+\begin{codebox}
+\Procname{$\proc{Find-Node}(head,index)$}
+\li $tmpNode\get head$
+\li \While $index>0$\Do
+\li     $index\get index-1$
+\li     $tmpNode\get tmpNode.next$
+    \End
+\li \Return $tmpNode$
+\end{codebox}
+\begin{codebox}
+\Procname{$\proc{Find-Index}(head,node)$}
+\li $tmpNode\get head$
+\li $index\get 1$
+\li \While $tmpNode\neq node$\Do
+\li     $index\get index+1$
+\li     $tmpNode\get tmpNode.next$
+    \End
+\li \Return $index$
+\end{codebox}
+
+\proc{Find-Node} is a procedure that returns the node of the given index. \proc{Find-Index} is a procedure that returns the index of the given node. It's easy to verify that both procedure comsumes linear time and constant extra space.
+
+Note that two linked lists are identical in shape if and only if their chain parts and loop parts are of same length respectively.In problem (b), we have introcuded a $O(n)$-time and $O(1)$-space procedure \texttt{loopLength} to calculate the length of the loop part of a given linked list. Thus, it remains to calculate $chainLength$, the length of the chain part. The followings are two procedures for calculating $chainLength$, and meets the constraints of (c) and (d) respectively.
+
+The procedure \proc{Chain-Length(c)} exploits the fact that if $chainLength>0$, then $chainLength$ is exactly the index of the last node that is not on the loop. Thus, we can use binary search to find such index.
+
+\begin{codebox}
+\Procname{$\proc{chainLengthC}(head)$}
 \li $left\get 1$
 \li $right\get 1$
 \li $loopNode\get isLoop(head)$
-\li $tmpNode\get head$
-\li \While $tmpNode\neq loopNode$ \Do
-\li     $tmpNode\get tmpNode.next$
-\li     $right\get right+1$
-    \End
+\li $right\get \proc{FindIndex}(loopNode)$
 \li \If $loopNode=NULL$ \Then
 \li     \Return $right-1$
     \End
 \li \While $right-left>1$ \Do
 \li     $middle\get \floor{(left+right)/2}$
-\li     \If $Find-Node(head,middle)=Find-Node(head,middle+loopLength(head))$ \Then
+\li     \If $\proc{Find-Node}(head,middle)=\proc{Find-Node}(head,middle+loopLength(head))$ \Then
 \li         $right\get middle$
 \li     \Else
 \li         $left\get middle$
         \End
     \End
 \li \Return $left$
-
-    
 \end{codebox}
-        \item \points{6}$O(n)$ time, $O(n)$ extra space.\\
-    \noindent $n$ is the sum of the numbers of nodes of $A$ and $B$, and you are ignorant of the value of $n$. You are free to use functions \texttt{loopLength()} and \texttt{isLoop()} defined above.
+
 \begin{codebox}
-\Procname{$\proc{Chain-Length-d}(head)$}
+
+\Procname{$\proc{chainLengthD}(head)$}
 \li $loopNode\get isLoop(head)$
-\li $tmpNode\get head$
-\li $index\get 1$
-\li \While $tmpNode\neq loopNode$ \Do
-\li     $tmpNode\get tmpNode.next$
-\li     $index\get index+1$
-    \End
+\li $index\get \proc{Find-Index}(head, loopNode)$
 \li \If $loopNode=NULL$ \Then
 \li     \Return $index-1$
     \End
@@ -433,7 +457,15 @@ unsigned int loopLength(ListNode* head){
 \li \For $i=1$ \To $loopLength(head)$ \Do
 \li     $loopArray[i]\get tmpNode$
 \li     $tmpNode\get tmpNode.next$
-\li \End
+    \End
+\li $i_{chain}\get index$
+\li $i_{loop}\get loopLength(head)$
+\li \While $chainArray[i_{chain}]\neq loopArray[i_{loop}]$\Do
+\li     $i_{chain}\get i_{chain}-1$
+\li     $i_{loop}\get i_{loop}-1$
+    \End
+\li \Return $i_{chain}$
+
 \end{codebox}
     \end{enumerate}
 
