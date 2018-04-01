@@ -391,7 +391,7 @@ unsigned int loopLength(ListNode* head){
 
 \solution
     
-    To make the notation consistent, let's 
+    To make the notation consistent, we will use \proc{Is-Loop} and \proc{Loop-Length} to denote the two function introduced above in the following procedure.
 
     For simplicity, let's define two procedure \proc{Find-Node} and \proc{Find-Index} first.
 \begin{codebox}
@@ -416,22 +416,22 @@ unsigned int loopLength(ListNode* head){
 
 \proc{Find-Node} is a procedure that returns the node of the given index. \proc{Find-Index} is a procedure that returns the index of the given node. It's easy to verify that both procedure comsumes linear time and constant extra space.
 
-Note that two linked lists are identical in shape if and only if their chain parts and loop parts are of same length respectively.In problem (b), we have introcuded a $O(n)$-time and $O(1)$-space procedure \texttt{loopLength} to calculate the length of the loop part of a given linked list. Thus, it remains to calculate $chainLength$, the length of the chain part. The followings are two procedures for calculating $chainLength$, and meets the constraints of (c) and (d) respectively.
+Note that two linked lists are identical in shape if and only if their chain parts and loop parts are of same length respectively. In problem (b), we have introcuded a $O(n)$-time and $O(1)$-space procedure \proc{Loop-Length} to calculate the length of the loop part of a given linked list. Thus, it remains to calculate $chainLength$, the length of the chain part. The followings are two procedures for calculating $chainLength$, and meets the constraints of (c) and (d) respectively.
 
-The procedure \proc{Chain-Length(c)} exploits the fact that if $chainLength>0$, then $chainLength$ is exactly the index of the last node that is not on the loop. Thus, we can use binary search to find such index.
+The procedure \proc{Chain-Length-C} exploits the fact that if $chainLength>0$, then $chainLength$ is exactly the index of the last node that is not on the loop. Thus, we can use binary search to find such index. The upper bound is set to be the index of a node on the loop, while the lower bound is set to be $1$. We can check if a node is on loop or not by checking if the next $loopLength$ node is equal to its self.
 
 \begin{codebox}
-\Procname{$\proc{chainLengthC}(head)$}
+\Procname{$\proc{Chain-Length-C}(head)$}
 \li $left\get 1$
 \li $right\get 1$
-\li $loopNode\get isLoop(head)$
-\li $right\get \proc{FindIndex}(loopNode)$
+\li $loopNode\get \proc{Is-Loop}(head)$
+\li $right\get \proc{Find-Index}(loopNode)$
 \li \If $loopNode=NULL$ \Then
 \li     \Return $right-1$
     \End
 \li \While $right-left>1$ \Do
 \li     $middle\get \floor{(left+right)/2}$
-\li     \If $\proc{Find-Node}(head,middle)=\proc{Find-Node}(head,middle+loopLength(head))$ \Then
+\li     \If $\proc{Find-Node}(head,middle)=\proc{Find-Node}(head,middle+\proc{Loop-Length}(head))$ \Then
 \li         $right\get middle$
 \li     \Else
 \li         $left\get middle$
@@ -442,7 +442,9 @@ The procedure \proc{Chain-Length(c)} exploits the fact that if $chainLength>0$, 
 
 \begin{codebox}
 
-\Procname{$\proc{chainLengthD}(head)$}
+In the procedure \proc{Chain-Length-D}, we first use \proc{IsLoop} to find a node, say, $L$, on the loop. Then, we record two arrays, $chainArray$ and $loopArray$. The former 
+
+\Procname{$\proc{Chain-Length-D}(head)$}
 \li $loopNode\get isLoop(head)$
 \li $index\get \proc{Find-Index}(head, loopNode)$
 \li \If $loopNode=NULL$ \Then
