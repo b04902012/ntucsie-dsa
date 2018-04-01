@@ -11,6 +11,7 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{listing}
+\usepackage{framed}
 \definecolor{mGreen}{rgb}{0,0.6,0}
 \definecolor{mGray}{rgb}{0.5,0.5,0.5}
 \definecolor{mPurple}{rgb}{0.58,0,0.82}
@@ -56,7 +57,7 @@
 
 \theoremstyle{definition}
 \newtheorem{problem}{\textbf{Problem}}
-\newcommand{\solution}{\textbf{Solution.}} 
+\newcommand{\solution}{\noindent\textbf{Solution.}} 
 \newtheorem{example}{Example}
 
 
@@ -228,6 +229,7 @@ For each problem, if it's not trivial, please briefly explain why your procedure
         Both $A$ and $B$ are read-only, you cannot modify them.\\
         In $o(n^2)$ time, $O(1)$ extra space.
 
+\begin{framed}
     \textbf{Solution.}
 
     It's easy to verify that $\forall P\subseteq [1,n]$, $\sum\limits_{j\in P}a_j=\sum\limits_{j\in P}b_j$ iff $i\notin P$.
@@ -262,6 +264,7 @@ For each problem, if it's not trivial, please briefly explain why your procedure
 \li \Output $ans$
     
 \end{codebox}
+\end{framed}
 
 \item \points{20}You are given the heads of two read-only singly linked list $A$ and $B$. The tail node might not point to \textit{NULL} but point to another node, so they might contain loop. Please follow the guide and design a procedure to determine whether the shapes of the linked lists are identical.\\
         For example, among the following linked lists, linked list $\beta$ and linked list $\delta$ are identical in shape. You may discover that a linked list contains at most one loop, and if there is one, then the loop must appears at the end. Thus, two linked lists are identical in shape if and only if their "chain parts" and the "loop parts" are of equal sizes respectively, while the data they store are irrelevant to their shapes.\\
@@ -345,6 +348,8 @@ For each problem, if it's not trivial, please briefly explain why your procedure
         In $O(n)$ time, $O(1)$ extra space, while $n$ is the number of nodes of the given linked list. Please note that the only input is the head of the linked list, and you are ignorant of the value of $n$.
 
         (Hint: Consider two pointers pointing to the head initially and moving at different speed.)
+\begin{framed}
+\solution
 
 \begin{lstlisting}[style=CStyle]
 typedef struct listnode{
@@ -362,10 +367,12 @@ ListNode* isLoop(ListNode* head){
     return ptr_fast;
 }
 \end{lstlisting}
+\end{framed}
 
         \item \points{3}Please complete the C function below to determine the length of the loop of the given linked list. The length of the loop is defined as the number of nodes on the loop. You are free to use function \texttt{isLoop()} defined above.\\
         In $O(n)$ time, $O(1)$ extra space.
 
+\begin{framed}
 \solution
 
 \begin{lstlisting}[style=CStyle]
@@ -381,6 +388,7 @@ unsigned int loopLength(ListNode* head){
     return l;
 }
 \end{lstlisting}
+\end{framed}
 \end{enumerate}
         Please describe a procedure that determine whether $A$ and $B$ are of same shape. Your procedure should takes the heads of $A$ and $B$ as its input. If they are of same shape, output $1$, otherwise, output $0$. In:
 \begin{enumerate}[label=\alph*.]
@@ -388,7 +396,7 @@ unsigned int loopLength(ListNode* head){
         \item \points{6}$O(n \lg n)$ time, $O(1)$ extra space.
         \item \points{6}$O(n)$ time, $O(n)$ extra space.\\
     \noindent $n$ is the sum of the numbers of nodes of $A$ and $B$, and you are ignorant of the value of $n$. You are free to use functions \texttt{loopLength()} and \texttt{isLoop()} defined above.
-
+\begin{framed}
 \solution
     
     To make the notation consistent, we will use \proc{Is-Loop} and \proc{Loop-Length} to denote the two function introduced above in the following procedure.
@@ -431,7 +439,9 @@ The procedure \proc{Chain-Length-C} exploits the fact that if $chainLength>0$, t
     \End
 \li \While $right-left>1$ \Do
 \li     $middle\get \floor{(left+right)/2}$
-\li     \If $\proc{Find-Node}(head,middle)=\proc{Find-Node}(head,middle+\proc{Loop-Length}(head))$ \Then
+\li     $middleNode\get\proc{Find-Node}(head,middle)$
+\li     $middleNode'\get\proc{Find-Node}(head,middle+\proc{LoopLength}(head))$
+\li     \If $middleNode=middleNode'$ \Then
 \li         $right\get middle$
 \li     \Else
 \li         $left\get middle$
@@ -440,10 +450,9 @@ The procedure \proc{Chain-Length-C} exploits the fact that if $chainLength>0$, t
 \li \Return $left$
 \end{codebox}
 
+In the procedure \proc{Chain-Length-D}, we first call \proc{IsLoop} to find a node, say, $L$, on the loop. Then, we record two arrays, $chainArray$ and $loopArray$. The former stores the node sequence from $head$ to $L$, while the latter stores the node sequence from $L.next$ to $L$, that is, the whole loop. Now we construct two pointer initially pointed to $L$, and they both move backward one node per iteration. One moves along $chainArray$ and the others move along $loopArray$. Once the two pointer point to different node, the former will be pointing at the last node that is not on loop.
+
 \begin{codebox}
-
-In the procedure \proc{Chain-Length-D}, we first use \proc{IsLoop} to find a node, say, $L$, on the loop. Then, we record two arrays, $chainArray$ and $loopArray$. The former 
-
 \Procname{$\proc{Chain-Length-D}(head)$}
 \li $loopNode\get isLoop(head)$
 \li $index\get \proc{Find-Index}(head, loopNode)$
@@ -467,8 +476,8 @@ In the procedure \proc{Chain-Length-D}, we first use \proc{IsLoop} to find a nod
 \li     $i_{loop}\get i_{loop}-1$
     \End
 \li \Return $i_{chain}$
-
 \end{codebox}
+\end{framed}
     \end{enumerate}
 
 \end{enumerate}
