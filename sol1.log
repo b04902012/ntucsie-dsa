@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Arch Linux) (preloaded format=xelatex 2018.3.9)  2 APR 2018 05:44
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017/Arch Linux) (preloaded format=xelatex 2018.3.8)  2 APR 2018 12:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1192,68 +1192,97 @@ File: se-ascii-print.def 2016/05/16 v1.11 stringenc: Printable ASCII characters
 ) [1
 
 ] [2]
+Underfull \hbox (badness 10000) in paragraph at lines 149--154
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 155--164
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 165--174
+
+ []
+
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 192--193
+Underfull \hbox (badness 10000) in paragraph at lines 181--191
 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 267
- []
+Underfull \hbox (badness 10000) in paragraph at lines 206--214
 
-
-Overfull \vbox (151.79651pt too high) detected at line 267
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 269--271
+Underfull \hbox (badness 10000) in paragraph at lines 222--234
+
+ []
+
+[5] [6]
+Underfull \hbox (badness 10000) in paragraph at lines 304--305
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 286--288
+Underfull \vbox (badness 10000) detected at line 379
+ []
+
+
+Overfull \vbox (151.79651pt too high) detected at line 379
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 381--383
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 300--302
+Underfull \hbox (badness 10000) in paragraph at lines 398--400
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 314--316
+Underfull \hbox (badness 10000) in paragraph at lines 412--414
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 328--330
+Underfull \hbox (badness 10000) in paragraph at lines 426--428
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 342--344
+Underfull \hbox (badness 10000) in paragraph at lines 440--442
 
  []
 
-[5] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+
+Underfull \hbox (badness 10000) in paragraph at lines 454--456
+
+ []
+
+[8] (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 355.
- [6]
-Overfull \hbox (20.14253pt too wide) in paragraph at lines 479--479
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 467.
+ [9]
+Overfull \hbox (20.14253pt too wide) in paragraph at lines 591--591
 | [] 
  []
 
-[7]
-Overfull \vbox (280.23555pt too high) detected at line 480
+[10]
+Overfull \vbox (280.23555pt too high) detected at line 592
  []
 
-[8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 511--512
+[11] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 623--624
 
  []
 
@@ -1262,80 +1291,80 @@ File: cursor1.png Graphic file (type bmp)
 File: cursor2.png Graphic file (type bmp)
 <cursor2.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 518--520
+Underfull \hbox (badness 10000) in paragraph at lines 630--632
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 521--525
+Underfull \hbox (badness 10000) in paragraph at lines 633--637
 
  []
 
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 526--528
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 529--533
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 638--640
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 535--544
+Underfull \hbox (badness 10000) in paragraph at lines 641--645
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 545--553
-
- []
-
-[11]
-Underfull \hbox (badness 10000) in paragraph at lines 558--561
+Underfull \hbox (badness 10000) in paragraph at lines 647--656
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 562--566
+Underfull \hbox (badness 10000) in paragraph at lines 657--665
+
+ []
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 670--673
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 567--569
+Underfull \hbox (badness 10000) in paragraph at lines 674--678
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 570--575
+Underfull \hbox (badness 10000) in paragraph at lines 679--681
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 576--578
+Underfull \hbox (badness 10000) in paragraph at lines 682--687
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 579--581
+Underfull \hbox (badness 10000) in paragraph at lines 688--690
 
  []
 
-[12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 583.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 583.
+
+Underfull \hbox (badness 10000) in paragraph at lines 691--693
+
+ []
+
+[15]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 695.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 695.
  (./sol1.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 583.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 583.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 583.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 695.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 695.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 695.
  ) 
 Here is how much of TeX's memory you used:
  34451 strings out of 493007
  690131 string characters out of 6140076
- 847702 words of memory out of 5000000
+ 847707 words of memory out of 5000000
  38025 multiletter control sequences out of 15000+600000
  535373 words of font info for 53 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  54i,10n,73p,10387b,1486s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on sol1.pdf (12 pages).
+Output written on sol1.pdf (15 pages).
